@@ -5,7 +5,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-	"log"
 )
 
 // NNSPacket is a raw NNS packet before any decryption
@@ -44,7 +43,6 @@ func UnmarshalNNSPacket(reader io.Reader) (packet DataPacket, err error) {
 	if err != nil {
 		return packet, err
 	}
-	log.Printf("NNS packet size : %s", packet.Size)
 	buffer := bytes.NewBuffer([]byte{})
 	_, err = io.CopyN(buffer, reader, int64(packet.Size))
 	if err != nil {
